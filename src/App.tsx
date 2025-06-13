@@ -4,7 +4,6 @@ import { AuthPage } from './components/AuthPage';
 import { Header } from './components/Header';
 import { SwimmerForm } from './components/SwimmerForm';
 import { SwimmerList } from './components/SwimmerList';
-import { EmailModal } from './components/EmailModal';
 import { AdminPanel } from './components/AdminPanel';
 import { Swimmer, SwimmerFormData } from './types/swimmer';
 import { Loader2, Clock } from 'lucide-react';
@@ -13,7 +12,6 @@ import { storageService } from './services/storage';
 const AppContent: React.FC = () => {
   const { isAuthenticated, isLoading, user } = useAuth();
   const [swimmers, setSwimmers] = useState<Swimmer[]>([]);
-  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
 
   // Charger les nageurs au démarrage
   useEffect(() => {
@@ -47,10 +45,6 @@ const AppContent: React.FC = () => {
     });
   };
 
-  const handleSendEmail = (swimmers: Swimmer[]) => {
-    setIsEmailModalOpen(true);
-  };
-
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50 flex items-center justify-center">
@@ -81,7 +75,6 @@ const AppContent: React.FC = () => {
               <SwimmerList 
                 swimmers={swimmers} 
                 onDelete={handleDeleteSwimmer}
-                onSendEmail={handleSendEmail}
               />
             )}
           </>
@@ -102,12 +95,6 @@ const AppContent: React.FC = () => {
           </div>
         )}
       </main>
-
-      <EmailModal
-        swimmers={swimmers}
-        isOpen={isEmailModalOpen}
-        onClose={() => setIsEmailModalOpen(false)}
-      />
 
       <footer className="bg-white border-t border-gray-200 mt-16">
         <div className="container mx-auto px-4 py-6 text-center text-gray-600">
