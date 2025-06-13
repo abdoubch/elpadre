@@ -133,15 +133,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, onSwitchToRegist
         </p>
       </div>
 
-      <div className="mt-8 p-4 bg-amber-50 border border-amber-200 rounded-lg">
-        <p className="text-sm text-amber-800 mb-2">
-          <strong>Compte administrateur par défaut :</strong>
-        </p>
-        <p className="text-xs text-amber-700">
-          Email: mouloud_natation@yahoo.fr<br />
-          Mot de passe: mouloudmouloud7366
-        </p>
-      </div>
+      
     </div>
   );
 };
