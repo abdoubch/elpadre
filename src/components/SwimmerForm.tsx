@@ -1,7 +1,30 @@
 import React, { useState } from 'react';
 import { User, Calendar, Trophy, Clock, Waves, Send } from 'lucide-react';
 import { SwimmerFormData } from '../types/swimmer';
-import { COURSES_NATATION, COMPETITIONS_TYPES } from '../data/courses';
+
+const COURSES_NATATION = [
+  '50m Nage Libre',
+  '100m Nage Libre',
+  '200m Nage Libre',
+  '400m Nage Libre',
+  '800m Nage Libre',
+  '1500m Nage Libre',
+  '50m Brasse',
+  '100m Brasse',
+  '200m Brasse',
+  '50m Dos',
+  '100m Dos',
+  '200m Dos',
+  '50m Papillon',
+  '100m Papillon',
+  '200m Papillon',
+  '200m 4 Nages',
+  '400m 4 Nages',
+  '4x50m Nage Libre',
+  '4x100m Nage Libre',
+  '4x50m 4 Nages',
+  '4x100m 4 Nages'
+];
 
 interface SwimmerFormProps {
   onSubmit: (swimmer: SwimmerFormData) => void;
@@ -124,44 +147,42 @@ export const SwimmerForm: React.FC<SwimmerFormProps> = ({ onSubmit }) => {
           </div>
         </div>
 
-        <div>
-          <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-            <Trophy className="w-4 h-4 mr-2 text-blue-600" />
-            Compétition *
-          </label>
-          <select
+        <div className="space-y-4">
+          <div>
+            <label htmlFor="competition" className="block text-sm font-medium text-gray-700">
+              Compétition
+            </label>
+            <input
+            type="text"
+            id="competition"
+            name="competition"
             value={formData.competition}
             onChange={(e) => handleChange('competition', e.target.value)}
-            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${
-              errors.competition ? 'border-red-300 bg-red-50' : 'border-gray-300 hover:border-gray-400'
-            }`}
-          >
-            <option value="">Sélectionnez une compétition</option>
-            {COMPETITIONS_TYPES.map((comp) => (
-              <option key={comp} value={comp}>{comp}</option>
-            ))}
-          </select>
-          {errors.competition && <p className="text-red-600 text-sm mt-1">{errors.competition}</p>}
-        </div>
+            className="mt-1 block w-full rounded-xl border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm p-4"
+            required
+          />
 
-        <div>
-          <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-            <Waves className="w-4 h-4 mr-2 text-blue-600" />
-            Course *
-          </label>
-          <select
-            value={formData.course}
-            onChange={(e) => handleChange('course', e.target.value)}
-            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${
-              errors.course ? 'border-red-300 bg-red-50' : 'border-gray-300 hover:border-gray-400'
-            }`}
-          >
-            <option value="">Sélectionnez une course</option>
-            {COURSES_NATATION.map((course) => (
-              <option key={course} value={course}>{course}</option>
-            ))}
-          </select>
-          {errors.course && <p className="text-red-600 text-sm mt-1">{errors.course}</p>}
+          </div>
+
+          <div>
+            <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
+              <Waves className="w-4 h-4 mr-2 text-blue-600" />
+              Course *
+            </label>
+            <select
+              value={formData.course}
+              onChange={(e) => handleChange('course', e.target.value)}
+              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${
+                errors.course ? 'border-red-300 bg-red-50' : 'border-gray-300 hover:border-gray-400'
+              }`}
+            >
+              <option value="">Sélectionnez une course</option>
+              {COURSES_NATATION.map((course) => (
+                <option key={course} value={course}>{course}</option>
+              ))}
+            </select>
+            {errors.course && <p className="text-red-600 text-sm mt-1">{errors.course}</p>}
+          </div>
         </div>
 
         <div>
